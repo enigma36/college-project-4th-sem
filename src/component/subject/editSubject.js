@@ -2,20 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function EditTeacher() {
+export default function EditSubject() {
   let navigate = useNavigate();
 
   const { id } = useParams();
 
   const [user, setUser] = useState({
-    address:'',
-    contact:'',
-    email: "",
     name: "",
-    password:""
+    semester: "",
+    teacherId: "",
   });
 
-  const { address, contact, email, name, password } = user;
+  const { name, semester, teacherId } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -27,13 +25,25 @@ export default function EditTeacher() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`https://student-status-system.herokuapp.com/api/v1/teacher/update`, user);
-    navigate("/teacherlist");
+    await axios.put(
+      `https://student-status-system.herokuapp.com/api/v1/subject/update`,
+      user
+    );
+    navigate("/subjectlist");
   };
 
   const loadUser = async () => {
-    const result = await axios.get(`https://student-status-system.herokuapp.com/api/v1/teacher/${id}`);
+    const result = await axios.get(
+      `https://student-status-system.herokuapp.com/api/v1/subject/${id}`
+    );
     setUser(result.data.data);
+  };
+
+  const deleteUser = async (id) => {
+    await axios.delete(
+      `https://student-status-system.herokuapp.com/api/v1/subject/delete/${id}`
+    );
+    navigate("/subjectlist");
   };
 
   return (
@@ -43,7 +53,7 @@ export default function EditTeacher() {
           <h2 className="text-center m-4">Edit Teacher</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
-          <div className="mb-3" style={{display:'none'}}>
+            <div className="mb-3" style={{ display: "none" }}>
               <label htmlFor="ID" className="form-label">
                 ID
               </label>
@@ -56,7 +66,7 @@ export default function EditTeacher() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            
+
             <div className="mb-3">
               <label htmlFor="Name" className="form-label">
                 Name
@@ -71,64 +81,45 @@ export default function EditTeacher() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Address" className="form-label">
-                Address
+              <label htmlFor="semester" className="form-label">
+                Semester
               </label>
               <input
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your Address"
-                name="address"
-                value={address}
+                name="semester"
+                value={semester}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Email" className="form-label">
-                E-mail
+              <label htmlFor="TeacherId" className="form-label">
+                TeacherID
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your e-mail address"
-                name="email"
-                value={email}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="Contact" className="form-label">
-                Contact
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter your contact"
-                name="contact"
-                value={contact}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="Password" className="form-label">
-                Password
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter your password"
-                name="password"
-                value={password}
+                placeholder="TeacherId"
+                name="teacherId"
+                value={teacherId}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/teacherlist">
+            <Link className="btn btn-outline-danger mx-2" to="/subjectlist">
               Cancel
             </Link>
+            <button
+            className="btn btn-danger my-1"
+            onClick={() => deleteUser(user.id)}
+          >
+            Delete
+          </button>
           </form>
+         
         </div>
       </div>
     </div>

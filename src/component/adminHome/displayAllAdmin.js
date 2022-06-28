@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 export default function DisplayAllAdmin() {
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState('');
 
   const { id } = useParams();
 
@@ -17,6 +18,9 @@ export default function DisplayAllAdmin() {
     );
     setUsers(result.data.data);
   };
+  const searchID = (e) => {
+    setSearch(e.target.value);
+  };
 
   const deleteUser = async (id) => {
     await axios.delete(
@@ -29,6 +33,21 @@ export default function DisplayAllAdmin() {
     <>
       <div className="container">
         <div className="py-4">
+        <div>
+            <input value={search} onChange={(e) => searchID(e)} type="text" />
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/viewuser/${search}`}
+            >
+              view
+            </Link>
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/edituser/${search}`}
+            >
+              edit
+            </Link>
+          </div>
           <table className="table border shadow">
             <thead>
               <tr>

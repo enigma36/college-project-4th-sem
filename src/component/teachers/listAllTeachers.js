@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 export default function ListAllTeachers() {
   const [users, setUsers] = useState([]);
 
+  const [search, setSearch] = useState('');
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,6 +20,10 @@ export default function ListAllTeachers() {
     setUsers(result.data.data);
   };
 
+  const searchID = (e) => {
+    setSearch(e.target.value);
+  };
+
   const deleteUser = async (id) => {
     await axios.delete(
       `https://student-status-system.herokuapp.com/api/v1/teacher/delete/${id}`
@@ -29,6 +35,21 @@ export default function ListAllTeachers() {
     <>
       <div className="container">
         <div className="py-4">
+          <div>
+            <input value={search} onChange={(e) => searchID(e)} type="text" />
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/viewteacher/${search}`}
+            >
+              view
+            </Link>
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/editteacher/${search}`}
+            >
+              edit
+            </Link>
+          </div>
           <table className="table border shadow">
             <thead>
               <tr>
@@ -75,7 +96,7 @@ export default function ListAllTeachers() {
               ))}
             </tbody>
           </table>
-          
+
           <Link className="btn btn-outline-primary mx-2" to={`/addteacher`}>
             Add Teacher
           </Link>

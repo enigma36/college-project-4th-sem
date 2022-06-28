@@ -5,11 +5,17 @@ import { Link, useParams } from "react-router-dom";
 export default function DisplayAllStudent() {
   const [users, setUsers] = useState([]);
 
+  const [search, setSearch] = useState('');
+
   const { id } = useParams();
 
   useEffect(() => {
     loadUsers();
   }, []);
+
+  const searchID = (e) => {
+    setSearch(e.target.value);
+  };
 
   const loadUsers = async () => {
     const result = await axios.get(
@@ -29,6 +35,21 @@ export default function DisplayAllStudent() {
     <>
       <div className="container">
         <div className="py-4">
+        <div>
+            <input value={search} onChange={(e) => searchID(e)} type="text" />
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/viewstudent/${search}`}
+            >
+              view
+            </Link>
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/editstudent/${search}`}
+            >
+              edit
+            </Link>
+          </div>
           <table className="table border shadow">
             <thead>
               <tr>

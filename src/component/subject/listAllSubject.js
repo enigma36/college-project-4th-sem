@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 export default function ListAllSubject() {
   const [users, setUsers] = useState([]);
 
+  const [search, setSearch] = useState('');
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,6 +20,10 @@ export default function ListAllSubject() {
     setUsers(result.data.data);
   };
 
+  const searchID = (e) => {
+      setSearch(e.target.value);
+  };
+
   const deleteUser = async (id) => {
     await axios.delete(
       `https://student-status-system.herokuapp.com/api/v1/subject/delete/${id}`
@@ -25,10 +31,21 @@ export default function ListAllSubject() {
     loadUsers();
   };
 
+
   return (
     <>
+      
       <div className="container">
         <div className="py-4">
+          <div>
+            <input value={search} onChange={(e)=>searchID(e)} type="text"/>
+            <Link className="btn btn-primary mx-2" to={`/viewsubject/${search}`}>
+            view
+          </Link>
+          <Link className="btn btn-primary mx-2" to={`/editsubject/${search}`}>
+            edit
+          </Link>
+          </div>
           <table className="table border shadow">
             <thead>
               <tr>
@@ -50,13 +67,13 @@ export default function ListAllSubject() {
                   <td>
                     <Link
                       className="btn btn-primary mx-2"
-                      to={`/viewSubject/${user.id}`}
+                      to={`/viewsubject/${user.id}`}
                     >
                       View
                     </Link>
                     <Link
                       className="btn btn-outline-primary mx-2"
-                      to={`/editSubject/${user.id}`}
+                      to={`/editsubject/${user.id}`}
                     >
                       Edit
                     </Link>
@@ -71,7 +88,7 @@ export default function ListAllSubject() {
               ))}
             </tbody>
           </table>
-          
+
           <Link className="btn btn-outline-primary mx-2" to={`/addsubject`}>
             Add Subject
           </Link>

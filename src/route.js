@@ -20,6 +20,9 @@ import AddTeacher from './component/teachers/addteacher'
 import ViewTeacher from './component/teachers/viewTeacher'
 import EditTeacher from './component/teachers/editTeacher'
 import ListAllSubject from './component/subject/listAllSubject'
+import AddSubject from './component/subject/addSubject'
+import ViewSubject from './component/subject/viewSubject'
+import EditSubject from './component/subject/editSubject'
 
 export default function Routing() {
   return (
@@ -45,7 +48,9 @@ export default function Routing() {
         <Route path='/viewTeacher/:id' element={<ViewTeacher/>}/>
         <Route path='/editTeacher/:id' element={<EditTeacher/>}/>
         <Route path='/subjectlist' element={<ListAllSubject/>}/>
-
+        <Route path='addsubject' element={<AddSubject/>}/>
+        <Route path='/viewsubject/:id' element={<ViewSubject/>}/>
+        <Route path='/editsubject/:id' element={<EditSubject/>}/>
     </Routes>
     </BrowserRouter>
   )

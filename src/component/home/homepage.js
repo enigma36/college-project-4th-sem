@@ -5,21 +5,22 @@ import './homepage.css'
 
 export default function Home() {
   return (
-    <>
+    <div className="home_container">
       <div>
-        <input type="text" placeholder="username" />
-        <input type="text" placeholder="password" />
-        <button>login</button>
+        <input type="email" className="email" placeholder="email" />
+        <input type="text" className="password" placeholder="password" />
+        <button className="home_button">login</button>
       </div>
-      <div>
-        <Link to="/signup">Signup</Link>
-      </div>
-      <div>
-        <Link to="/admin">admin panel</Link>
-      </div>
-      <div>
-        <Link to="/student">student panel</Link>
-      </div>
-    </>
+    
+     
+
+        <Link to="/signup" className="signup">Signup</Link>
+
+        <Link to="/admin" className="admin">admin panel</Link>
+
+        <Link to="/student" className="student">student panel</Link>
+  
+    </div>
   );
 }
+
