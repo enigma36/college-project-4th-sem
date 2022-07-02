@@ -23,6 +23,7 @@ import ListAllSubject from './component/subject/listAllSubject'
 import AddSubject from './component/subject/addSubject'
 import ViewSubject from './component/subject/viewSubject'
 import EditSubject from './component/subject/editSubject'
+import Error from './component/error page/error'
 
 export default function Routing() {
   return (
@@ -51,6 +52,7 @@ export default function Routing() {
         <Route path='addsubject' element={<AddSubject/>}/>
         <Route path='/viewsubject/:id' element={<ViewSubject/>}/>
         <Route path='/editsubject/:id' element={<EditSubject/>}/>
+        <Route path='/error' element={<Error/>}/>
     </Routes>
     </BrowserRouter>
   )

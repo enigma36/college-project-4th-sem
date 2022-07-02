@@ -18,7 +18,7 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            { /*<span className="navbar-toggler-icon"></span> */ }
           </button>
           
           <Link className="btn btn-outline-light" to="/adminlist">

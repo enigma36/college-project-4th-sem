@@ -8,10 +8,14 @@ export default function ListAllSubject() {
   const [search, setSearch] = useState('');
 
   const { id } = useParams();
+  
+  //const [Tname, setTname] = useState([]);
 
   useEffect(() => {
     loadUsers();
   }, []);
+
+
 
   const loadUsers = async () => {
     const result = await axios.get(
@@ -30,6 +34,11 @@ export default function ListAllSubject() {
     );
     loadUsers();
   };
+
+  /*const getTeacherName = async (Tid) => {
+    const result = await axios.get(`https://student-status-system.herokuapp.com/api/v1/teacher/${Tid}`);
+    setTname(result.data.data.name);
+  }*/
 
 
   return (
@@ -53,6 +62,8 @@ export default function ListAllSubject() {
                 <th scope="col">Name</th>
                 <th scope="col">Semester</th>
                 <th scope="col">Teacher</th>
+                {/*<th scope="col">Teacher Name</th>*/}
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -64,6 +75,7 @@ export default function ListAllSubject() {
                   <td>{user.name}</td>
                   <td>{user.semester}</td>
                   <td>{user.teacherId}</td>
+                  {/*<td onChange={getTeacherName(user.teacherId)}>{Tname}</td>*/}
                   <td>
                     <Link
                       className="btn btn-primary mx-2"

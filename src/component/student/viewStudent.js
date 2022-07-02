@@ -11,6 +11,7 @@ export default function ViewStudent() {
     password:''
   });
 
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function ViewStudent() {
   }, []);
 
   const loadUser = async () => {
-    const result = await axios.get(`https://student-status-system.herokuapp.com/api/v1/student/${id}`);
+    const result = await axios.get(`https://student-status-system.herokuapp.com/api/v1/student/${id}`)
     setUser(result.data.data);
   };
 

@@ -5,14 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 export default function AddSubject() {
   let navigate = useNavigate();
 
-
   const [user, setUser] = useState({
     name: "",
     semester: "",
-    teacherId: "",
+    teacherId:''
   });
-  
-  
+
+  const [Tname, setTname] = useState([]);
 
   const { name, semester, teacherId } = user;
 
@@ -21,6 +20,18 @@ export default function AddSubject() {
   };
 
  
+
+  useEffect(() => {
+    teacherNames();
+  }, []);
+
+  const teacherNames = async () => {
+    const result = await axios.get(
+      "https://student-status-system.herokuapp.com/api/v1/teacher/all"
+    );
+    setTname(result.data.data);
+    console.log(Tname);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +78,7 @@ export default function AddSubject() {
                 required
               />
             </div>
-
+            
             <div className="mb-3">
               <label htmlFor="teacherId" className="form-label">
                 Teacher
@@ -80,11 +91,21 @@ export default function AddSubject() {
                 required
                 placeholder="teacher"
                 value={teacherId}
-                name='teacherId'
+                name="teacherId"
               />
             </div>
 
             
+            <div className="mb-3">
+              <select className="form-control"
+              >
+                {Tname.map((teacherData, index) => (
+                <option key={index}>id:{teacherData.id} name:{teacherData.name}</option>
+                ))}
+              </select>
+            </div>
+                
+
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
