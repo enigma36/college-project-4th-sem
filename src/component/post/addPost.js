@@ -52,20 +52,20 @@ export default function AddPost() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your password"
+                placeholder="Enter Title"
                 name="title"
                 value={title}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="Email" className="form-label">
+              <label htmlFor="content" className="form-label">
                 Content
               </label>
               <input
-                type={"text"}
+                type={"textbox"}
                 className="form-control"
-                placeholder="Enter your e-mail address"
+                placeholder="Add content"
                 name="content"
                 value={content}
                 onChange={(e) => onInputChange(e)}
@@ -78,7 +78,7 @@ export default function AddPost() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your address"
+                placeholder="Enter the Faculty"
                 name="faculty"
                 value={faculty}
                 onChange={(e) => onInputChange(e)}
@@ -91,7 +91,7 @@ export default function AddPost() {
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your contact"
+                placeholder="Enter the semester"
                 name="semester"
                 value={semester}
                 onChange={(e) => onInputChange(e)}

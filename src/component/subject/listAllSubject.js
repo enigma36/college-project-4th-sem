@@ -5,27 +5,30 @@ import { Link, useParams } from "react-router-dom";
 export default function ListAllSubject() {
   const [users, setUsers] = useState([]);
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const { id } = useParams();
-  
-  //const [Tname, setTname] = useState([]);
+
+  const [Tname, setTname] = useState([]);
 
   useEffect(() => {
     loadUsers();
   }, []);
 
-
+  useEffect(() => {
+    getTeacherName();
+  }, []);
 
   const loadUsers = async () => {
     const result = await axios.get(
       "https://student-status-system.herokuapp.com/api/v1/subject/all"
     );
+    console.log(result)
     setUsers(result.data.data);
   };
 
   const searchID = (e) => {
-      setSearch(e.target.value);
+    setSearch(e.target.value);
   };
 
   const deleteUser = async (id) => {
@@ -34,26 +37,45 @@ export default function ListAllSubject() {
     );
     loadUsers();
   };
+  {
+    /*
+ const getTeacherName = async (Tid) => {
+    const result = await axios.get(
+      `https://student-status-system.herokuapp.com/api/v1/teacher/${Tid}`
+    );
+    
+       //setTname(result.data.data.name); 
+        console.log(result.data.data.name);
+  };
+  */
+  }
 
-  /*const getTeacherName = async (Tid) => {
-    const result = await axios.get(`https://student-status-system.herokuapp.com/api/v1/teacher/${Tid}`);
-    setTname(result.data.data.name);
-  }*/
-
+  const getTeacherName = async () => {
+    const result = await axios.get(
+      "https://student-status-system.herokuapp.com/api/v1/teacher/all"
+    );
+    setTname(result.data.data);
+  };
 
   return (
     <>
-      
       <div className="container">
         <div className="py-4">
           <div>
-            <input value={search} onChange={(e)=>searchID(e)} type="text"/>
-            <Link className="btn btn-primary mx-2" to={`/viewsubject/${search}`}>
-            view
-          </Link>
-          <Link className="btn btn-primary mx-2" to={`/editsubject/${search}`}>
-            edit
-          </Link>
+            {console.log(Tname)}
+            <input value={search} onChange={(e) => searchID(e)} type="text" />
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/viewsubject/${search}`}
+            >
+              view
+            </Link>
+            <Link
+              className="btn btn-primary mx-2"
+              to={`/editsubject/${search}`}
+            >
+              edit
+            </Link>
           </div>
           <table className="table border shadow">
             <thead>
@@ -62,7 +84,7 @@ export default function ListAllSubject() {
                 <th scope="col">Name</th>
                 <th scope="col">Semester</th>
                 <th scope="col">Teacher</th>
-                {/*<th scope="col">Teacher Name</th>*/}
+                <th scope="col">Teacher Name</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -75,7 +97,12 @@ export default function ListAllSubject() {
                   <td>{user.name}</td>
                   <td>{user.semester}</td>
                   <td>{user.teacherId}</td>
-                  {/*<td onChange={getTeacherName(user.teacherId)}>{Tname}</td>*/}
+                  {/*<td value={getTeacherName(user.teacherId)}>{Tname}</td> */}
+                  <td>{Tname.map((Tname) => {
+                    if (Tname.id == user.teacherId) {
+                      return Tname.name;
+                    }
+                  })}</td>
                   <td>
                     <Link
                       className="btn btn-primary mx-2"

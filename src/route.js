@@ -38,11 +38,11 @@ export default function Routing() {
         <Route path='viewstudent/:id' element ={<ViewStudent />} />
         <Route path='editstudent/:id' element={<EditStudent />} />
         <Route path='addstudent' element={<AddStudent />} />
-        <Route path='/' element={<Home />} />
-        <Route path='/signup' element={<StudentSignup />} />
-        <Route path='viewpost/:id' element={<ViewPost/>}/>
-        <Route path='editpost/:id' element={<EditPost/>}/>
         <Route path='/student' element={<StudentDisplayPost/>}/>
+        <Route path='/signup' element={<StudentSignup />} />
+        <Route path='/' element={<Home />} />
+        <Route path='editpost/:id' element={<EditPost/>}/>
+        <Route path='viewpost/:id' element={<ViewPost/>}/>
         <Route path="/addpost" element={<AddPost/>}/>
         <Route path='/teacherlist' element={<ListAllTeachers/>}/>
         <Route path='/addteacher' element={<AddTeacher/>}/>

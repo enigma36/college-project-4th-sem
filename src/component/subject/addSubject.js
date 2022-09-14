@@ -15,6 +15,7 @@ export default function AddSubject() {
 
   const { name, semester, teacherId } = user;
 
+
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -78,10 +79,11 @@ export default function AddSubject() {
                 required
               />
             </div>
-            
+
+           { /* 
             <div className="mb-3">
               <label htmlFor="teacherId" className="form-label">
-                Teacher
+                Teacher 
               </label>
               <input
                 onChange={(e) => onInputChange(e)}
@@ -93,6 +95,7 @@ export default function AddSubject() {
                 value={teacherId}
                 name="teacherId"
               />
+              
             </div>
 
             
@@ -100,11 +103,23 @@ export default function AddSubject() {
               <select className="form-control"
               >
                 {Tname.map((teacherData, index) => (
-                <option key={index}>id:{teacherData.id} name:{teacherData.name}</option>
+                <option key={index}>id: {teacherData.id} name: {teacherData.name}</option>
                 ))}
               </select>
             </div>
-                
+            */ }
+
+            <div className="mb-3">
+            <label htmlFor="teacherId" className="form-label">
+                Teacher 
+              </label>
+                  <select id='teacherId' className="form-control" name='teacherId' onChange={(e) => onInputChange(e) }>
+                    {Tname.map((tname, index)=> (
+                      <option key={index} value={tname.id}>{tname.name}</option>
+                    ))}
+                  </select>
+            </div>    
+            
 
             <button type="submit" className="btn btn-outline-primary">
               Submit

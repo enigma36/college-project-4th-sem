@@ -1,15 +1,19 @@
-import React from 'react'
-import Navbar from './navbar'
-import DisplayAllPost from '../post/displayAllPost'
+import React from "react";
+import Navbar from "./navbar";
+import DisplayAllPost from "../post/displayAllPost";
 
 function AdminHome() {
+
   return (
     <>
-    <Navbar />
-    <DisplayAllPost />
-
+      <Navbar />
+      <div>
+      <div>
+        <DisplayAllPost />
+      </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default AdminHome
+export default AdminHome;

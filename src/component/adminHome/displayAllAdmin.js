@@ -18,6 +18,7 @@ export default function DisplayAllAdmin() {
     );
     setUsers(result.data.data);
   };
+
   const searchID = (e) => {
     setSearch(e.target.value);
   };
@@ -29,18 +30,21 @@ export default function DisplayAllAdmin() {
     loadUsers();
   };
 
+
   return (
     <>
       <div className="container">
         <div className="py-4">
         <div>
             <input value={search} onChange={(e) => searchID(e)} type="text" />
+
             <Link
               className="btn btn-primary mx-2"
               to={`/viewuser/${search}`}
             >
               view
             </Link>
+
             <Link
               className="btn btn-primary mx-2"
               to={`/edituser/${search}`}
